@@ -15,7 +15,7 @@ const authentication = async (req, res, next) => {
 
     const token = await tokenService.findByUserId(userId);
 
-    if (!token) throw new ForbiddenRequestError("User ID not found");
+    if (!token) throw new ForbiddenRequestError("Invalid token");
 
     const accessToken = req.headers[HEADER.AUTHORIZATIION];
     if (!accessToken) throw new ForbiddenRequestError("Token not found");
