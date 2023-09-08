@@ -112,7 +112,7 @@ class AccessService {
                     user_id: holderUser._id,
                     public_key: userToken.publicKey,
                     token: userToken.token,
-                    refresh_token: token.refreshToken,
+                    refresh_token: userToken.refreshToken,
                 },
             },
             {
