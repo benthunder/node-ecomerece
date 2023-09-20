@@ -1,4 +1,5 @@
 @url=http://localhost:3000/v1/api
+@token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRmYjA3OTA4YTcwMjc2NTdjYjgyN2VmIiwiZW1haWwiOiJzaG9wYmVuOUBlbWFpbC5jb20iLCJpYXQiOjE2OTUyMTk1MDcsImV4cCI6MTY5NTMwNTkwN30.j5pEP0blEK7eQ8uFi5IoAHOsuDwtSGpfZfFHuLclyOY1adJiYWwj7f33tLjPhhhUXp2YX9eVumFdOoYdb3zLhR_x0WjnI1YbAQ8QNpYHARf-oz7XDGPRfyXdIFNcech4JFFfcdWhJoLbOkzZHM9a8P6Jx0WunqB4tuU2KhxrZNHTu2bT00PTYW0DWEDtKNIlWyCFc3izplm5H9S9wYyYDZxInOctXvdDvp7GlCs-yUAIo_N6_0AZHGGX1NceG8VxVRbXMiSbOtSzPLw71XtkhNbqdsIxg-IKhW8DQDjDHIELoAf3bZL5UdMggFK2ZPJnMXKm0RNqYLduo4TDnTi8eQm-XKA_GnbnIK6x8ovLdTOZtUnzgqywTWCeAeXjCdoMPI0tlKdHKYQ9LePjjIcRjvO4MIW5yL6fBb8DxqktZK3m0NJRnuhHL66ZmT_aPq8HpbSveoyj3ZWJlvEMKEKY_5fZAKbeLwd3Ix1rJ0ismHIKXOWc5wkAIMzFejL6Y3yeVsEqR9ZKVWqXsgP5BREqbVSUwk7TOChIpWPVDVjoAlVbo4VTPMs_xjDbgosdjCKP5kLxklQYABFfsO0zL_9opmxTlzO-s1_5jp1mw7bK-Lo0noNtpvN6nvFmM-ZEl71g-Rm5foM_R9SIHeN8wTFqEPNpvt8--DTyVVnFVPVXvBQ
 ### signup
 POST {{url}}/signup
 Content-Type: application/json
@@ -29,3 +30,24 @@ POST {{url}}/refresh_token
 Content-Type: application/json
 x-client-id: 64fb07908a7027657cb827ef
 Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRmYjA3OTA4YTcwMjc2NTdjYjgyN2VmIiwiZW1haWwiOiJzaG9wYmVuOUBlbWFpbC5jb20iLCJpc19yZWZyZXNoIjp0cnVlLCJpYXQiOjE2OTQyMDIwOTMsImV4cCI6MTY5NDgwNjg5M30.An7MTpiWI04mye84Cy1virY1fbMgbHqY9PWfXMAZPUvvRWUvIs5OJp-6vaXbK4QeoHVYiDg1ZCbiUh2CuXSzFL3tv2qE5SxkVX_-MxjcEk6OoR3C8tnc2csgkzQhBoOaxtD1IVMrAYN_jdCTb3BYOOasE08kKbqRQ4M5MzQ-VlPK835SzfEgSeJ-x8pqAKr_NkzTfxfkvGy8Mmc3DXu9AIekHeVnA19xaEMtSAziPcPHqBg6SrK2thZcSBrYyTjo9OI_bMNlADY4UokJi6mf0riaAGpTmDC-v9e8qZ7IjUn4OjZTWPTo5hUC2xaykS_v32OluKaKLEAxVLTbYJwhrzLNJs3gq_Vy9wpTEk-mUuhw9t493B0VYKiRa4UGsD18xCZlAknhtgeys3591YOED8xCVnl0ReDXOj1cZ4ulDMV5w8w_q5w6RJlOfhVY1EXwnE62jd4KZ83ezGNZtwrJaEU-j_StiPFi7wL113mzjBZq8MRGcpwHwpRQlgT7gl9AtL42dOMXDI-BnBsEJdCG-z4_VSH7mfPIggbtS0w5YQpX5D4ok2MEKgKUhkVtLKuhlBnqUiXY_xO4VSGbG_o5F43ZGcu6NuecM-pIy5HRgO_kpfeAbz4-6TpUp0rzicrRwBayn0zqJXzC7sXzuPE4JN-Q4XBCOUTdaLKgbYcpub0
+
+### create new product
+POST {{url}}/product
+Content-Type: application/json
+x-client-id: 64fb07908a7027657cb827ef
+Authorization: {{token}}
+
+{
+    "product_name": "New jeans 2",
+    "product_type": "Clothing",
+    "product_description": "Hello New jeans",
+    "product_price": 29.9,
+    "product_user": "64fb07908a7027657cb827ef",
+    "product_thumb": "no_image",
+    "product_quanity": 100,
+    "product_attributes": {
+        "brand": "Ben",
+        "size": "XL",
+        "material": "Jean"
+    }
+}
