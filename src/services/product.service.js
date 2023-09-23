@@ -39,16 +39,17 @@ class Product {
         this.product_attributes = product_attributes;
     }
 
-    async createProduct() {
-        return await product.create(this);
+    async createProduct(product_id) {
+        return await product.create({ ...this, _id: product_id });
     }
 }
 
 class ProductClothing extends Product {
     async createProduct() {
-        const newProductClothing = await clothing.create(
-            this.product_attributes
-        );
+        const newProductClothing = await clothing.create({
+            ...this.product_attributes,
+            product_user: this.product_user,
+        });
 
         if (!newProductClothing) {
             throw new ForbiddenRequestError(
@@ -56,7 +57,7 @@ class ProductClothing extends Product {
             );
         }
 
-        const newProduct = super.createProduct();
+        const newProduct = super.createProduct(newProductClothing._id);
         if (!newProduct) {
             throw new ForbiddenRequestError(
                 "Error create new Product Clothing"
@@ -69,9 +70,10 @@ class ProductClothing extends Product {
 
 class ProductElectronic extends Product {
     async createProduct() {
-        const newProductElectronic = await electronic.create(
-            this.product_attributes
-        );
+        const newProductElectronic = await electronic.create({
+            ...this.product_attributes,
+            product_user: this.product_user,
+        });
 
         if (!newProductElectronic) {
             throw new ForbiddenRequestError(
@@ -79,7 +81,7 @@ class ProductElectronic extends Product {
             );
         }
 
-        const newProduct = super.createProduct();
+        const newProduct = super.createProduct(newProductElectronic._id);
         if (!newProduct) {
             throw new ForbiddenRequestError(
                 "Error create new Product Electronic"

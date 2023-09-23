@@ -6,7 +6,11 @@ class ProductController {
         return await new CREATED({
             metadata: await ProductService.createProduct(
                 req.body.product_type,
-                req.body
+                {
+                    ...req.body,
+                    product_user:req.token.user
+                }
+                
             ),
         }).send(res);
     };
