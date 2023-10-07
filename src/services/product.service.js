@@ -4,19 +4,17 @@ const { product, electronic, clothing } = require("../models/product.model");
 const { ForbiddenRequestError } = require("../utils/reponse-error.util");
 
 class ProductFactory {
+    static productRegistry = {};
+    static registerProductType = (product_type, classRef) => {
+        ProductFactory.productRegistry[product_type] = classRef;
+    };
     static async createProduct(type, payload) {
-        switch (type) {
-            case "Electronic":
-                return new ProductElectronic(payload).createProduct();
-
-            case "Clothing":
-                return new ProductClothing(payload).createProduct();
-
-            default:
-                throw new ForbiddenRequestError(
-                    `Error create new Product ${type}`
-                );
+        const productClass = ProductFactory.productRegistry[type];
+        if (!type) {
+            throw new ForbiddenRequestError(`Type ${type} not invalid`);
         }
+
+        return new productClass(payload).createProduct();
     }
 }
 
@@ -91,5 +89,8 @@ class ProductElectronic extends Product {
         return newProduct;
     }
 }
+
+ProductFactory.registerProductType("Electronic", ProductElectronic);
+ProductFactory.registerProductType("Clothing", ProductClothing);
 
 module.exports = ProductFactory;
